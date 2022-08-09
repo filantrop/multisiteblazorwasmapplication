@@ -1,0 +1,105 @@
+version: '3.9'
+
+services:    
+    nginx-proxy:
+        build: 
+            context: .
+            dockerfile: nginx/Dockerfile.${ASPNETCORE_ENVIRONMENT}
+        #image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        restart: always
+        ports:            
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro            
+            - certs:/etc/nginx/certs
+        networks:
+            - public-back-net
+            - public-front-net
+            - admin-back-net
+            - admin-front-net
+        
+
+    public.server:
+        image: ${DOCKER_REGISTRY-}publicserver
+        #profiles:
+        #    -  debug
+        build:
+          context: .
+          dockerfile: ApplicationPublic/Server/Dockerfile          
+        networks:
+            - public-back-net
+
+        environment:
+            - VIRTUAL_HOST=${ClientApiUrl}
+            - ClientUrl=https://www.${ClientUrl}
+            - ClientApiUrl=https://${ClientApiUrl}
+            - AdminAuth_Authority=${AdminAuth_Authority}
+            - AdminAuth_ClientId=${AdminAuth_ClientId}
+            - CERT_NAME=${AdminCertDomain}
+            - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+            
+
+    public.client:
+        image: ${DOCKER_REGISTRY-}publicclient
+        
+        build:
+          context: .
+          dockerfile: ApplicationPublic/Client/Dockerfile
+          args:
+            - APPENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+        networks:            
+            - public-back-net
+            - public-front-net
+
+       
+        environment:
+            - VIRTUAL_HOST=www.${ClientUrl},${ClientUrl}
+            - CERT_NAME=${ClientCertDomain} 
+            - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+            
+
+    admin.server:
+        image: ${DOCKER_REGISTRY-}adminserver
+        
+        build:
+          context: .
+          dockerfile: ApplicationAdmin/Server/Dockerfile
+        networks:
+            - admin-back-net
+        environment:
+            - VIRTUAL_HOST=${AdminApiUrl}
+            - ClientUrl=https://www.${ClientUrl}
+            - AdminAuth_Authority=${AdminAuth_Authority}
+            - AdminAuth_ClientId=${AdminAuth_ClientId}
+            - CERT_NAME=${AdminCertDomain}
+            - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+           
+
+    admin.client:
+        image: ${DOCKER_REGISTRY-}adminclient
+       
+        build:
+          context: .
+          dockerfile: ApplicationAdmin/Client/Dockerfile
+          args:
+            - APPENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+
+        networks:
+            - admin-back-net
+            - admin-front-net
+        environment:
+            - VIRTUAL_HOST=${AdminUrl}
+            - CERT_NAME=${AdminCertDomain}
+            - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+            
+  
+volumes:
+   certs:
+
+networks:
+  public-back-net:
+  public-front-net:
+  admin-back-net:
+  admin-front-net:

@@ -1,0 +1,61 @@
+{
+  "LocalEnvironment": {
+    "Name": "Development",
+    "ClientApiUrl": "http://localhost:5016",
+    "ClientUrl": "http://localhost:5017",
+    "AdminApiUrl": "http://localhost:5018",
+    "AdminUrl": "http://localhost:5019",
+
+    "ClientCertDomain": "yourdomain",
+    "AdminCertDomain": "yourdomain",
+
+    "ClientAuth_Authority": "https://your_auth0url.auth0.com",
+    "ClientAuth_ClientId": "YOUR_AUTH0_CLIENT_ID",
+    "AdminAuth_Authority": "{https://your_auth0url.auth0.com}",
+    "AdminAuth_ClientId": "{YOUR_AUTH0_CLIENT_ID}"
+  },
+  "Environments": [
+    {
+      "Name": "Test",
+
+      "ClientApiUrl": "https://api.yourdomain.test",
+      "ClientUrl": "https://www.yourdomain.test",
+
+      "AdminApiUrl": "https://api-admin.yourdomain.test",
+      "AdminUrl": "https://admin.yourdomain.test",
+
+      "ClientCertDomain": "yourdomain.test",
+      "AdminCertDomain": "yourdomain.test",
+
+      "ClientAuth_Authority": "https://your_auth0url.auth0.com",
+      "ClientAuth_ClientId": "YOUR_AUTH0_CLIENT_ID",
+      "AdminAuth_Authority": "{https://your_auth0url.auth0.com}",
+      "AdminAuth_ClientId": "{YOUR_AUTH0_CLIENT_ID}"
+
+    },
+    {
+      "Name": "Production",
+
+      "ClientApiUrl": "https://api.your.domain",
+      "ClientUrl": "https://www.your.domain",
+      "AdminApiUrl": "https://api-admin.your.domain",
+      "AdminUrl": "https://admin.your.domain",
+
+      "ClientCertDomain": "your.domain",
+      "AdminCertDomain": "your.domain",
+
+      "ClientAuth_Authority": "https://your_auth0url.auth0.com",
+      "ClientAuth_ClientId": "YOUR_AUTH0_CLIENT_ID",
+      "AdminAuth_Authority": "{https://your_auth0url.auth0.com}",
+      "AdminAuth_ClientId": "{YOUR_AUTH0_CLIENT_ID}"
+
+    }
+  ],
+  "ProjectPaths": {
+    "PublicClientProjectPath": "ApplicationPublic\\Client",
+    "PublicServerProjectPath": "ApplicationPublic\\Server",
+    "AdminClientProjectPath": "ApplicationAdmin\\Client",
+    "AdminServerProjectPath": "ApplicationAdmin\\Server",
+    "DockerEnvironmentsPath": "config"
+  }
+}
