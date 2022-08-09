@@ -1,0 +1,3 @@
+FROM jwilder/nginx-proxy
+RUN mkdir /etc/nginx/vhost.d
+RUN echo "return 301 \$scheme://www.{YOUR_PUBLIC_DOMAIN}\$request_uri;">/etc/nginx/vhost.d/{YOUR_PUBLIC_DOMAIN}
