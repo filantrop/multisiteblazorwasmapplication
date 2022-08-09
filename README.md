@@ -7,7 +7,7 @@ And one admin Blazor wasm spa project and admin .net core api project that also 
 The 4 projects is hosted in dockers with a ngninx reverse proxy infront.
 
 There is a setup script to generate different artifacts based on a config file:
-- Creating selfsigned certificate and adding them as thrusted to get https:// 
+- Creating selfsigned certificate and adding them as trusted to get valid https:// in browser locally
 - Adding domains to the hosts file for testing to use your different environment domains in your browser
 - Creating launchsettings.json based on the environments file
 - Creating .env files to be used for docker-compose when building and running the services
