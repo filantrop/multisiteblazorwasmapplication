@@ -1,3 +1,9 @@
+
+# If script fails because of execution policy
+# Open powershell in adminmode (short Windows+X) 
+# Then run the following 'Set-ExecutionPolicy RemoteSigned'
+# You also have to unblock rules in firewall to prevent changes to hostsfile
+
 Set-Location -Path $PSScriptRoot
 
 $configPath = "..\config\config.template.json"
@@ -10,7 +16,7 @@ $stdOutPathResolved = $stdOutPath+"log.txt"
 
 
 if(!(Test-Path -Path $stdOutPath )){
-   New-Item -ItemType directory -Path $stdOutPathResolved
+   New-Item -ItemType directory -Path $stdOutPath
 }
 
 

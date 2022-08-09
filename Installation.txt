@@ -1,0 +1,39 @@
+#To run genereateEnvironments.template.ps1 you need to install openssl first
+# Install chocolatey run the following by open powershell as administrator (windows-x)
+#--------
+# Step 1.
+#--------
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Then install openssl
+#--------
+# Step 2.
+#--------
+choco Install openssl 
+
+# The first time you use this solution you need to build RunGenerators project
+
+
+#--------
+# Step 3.
+#--------
+# Then test to run the following script to se that it works
+Scripts/generateEnvironments.template.ps1
+
+
+#--------
+# Step 4.
+#--------
+# Your colud customize this file by creating your own e.g. Scripts/generateEnvironments.yourdomain.ps1 
+# and create a copy of Config/config.template.json and call it e.g. Config/config.yourdomain.json
+# Then run to generate all artifacts
+Scripts/generateEnvironments.yourdomain.ps1 
+
+#--------
+# Step 5.
+#--------
+Next try to build the solution
+
+#This will also create the client files Domain/AppEnvironment.cs in Admin.Client and PUblic.Client based on the AppEnvironments/AppEnvironmentDevelopment.txt that was generated before
+
+

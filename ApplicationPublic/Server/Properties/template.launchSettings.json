@@ -21,7 +21,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development", //{{Local.Name}}
         "ClientUrl": "http://localhost:5017", //{{Local.ClientUrl}}
-        "ClientApiUrl": "https://admin-api.your.domain",
+        "ClientApiUrl": "http://localhost:5016", //{{Local.ClientApiUrl}}
         "AdminAuth_Authority": "{https://your_auth0url.auth0.com}", //{{Local.AdminAuth_Authority}}
         "AdminAuth_ClientId": "{YOUR_AUTH0_CLIENT_ID}" //{{Local.AdminAuth_ClientId}}        
       },
